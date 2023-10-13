@@ -1,0 +1,39 @@
+create table Gym_members(
+  2  id number(5) primary key,
+  3  name varchar2(20) not null,
+  4  age number(3) not null check(age>0),
+  5  joining_date DATE not null,
+  6  Expiration_date DATE not null,
+  7  city varchar2(20) default 'pune' not null,
+  8  height number(20) not null,
+  9  weight number(30) not null,
+ 10  created_at Date default sysdate);
+
+ALTER TABLE Gym_members
+  2  ADD cost NUMBER NOT NULL CHECK(cost > 0);
+
+ create sequence Gym_seq
+  2  start with 1
+  3  increment by 1;
+
+insert into Gym_members(id, name, age,joining_date,Expiration_date,city,height,weight,cost) values(Gym_seq.nextval,'Abhishek Bormon',22,'15-JUL-2023','15-DEC-2023','Rangia',175,65,35000);
+insert into Gym_members(id, name, age,joining_date,Expiration_date,city,height,weight,cost) values(Gym_seq.nextval,'Anas Ahmed',24,'05-AUG-2023','25-SEP-2023','Chennai',160,80,80000);
+insert into Gym_members(id, name, age,joining_date,Expiration_date,city,height,weight,cost) values(Gym_seq.nextval,'Archisman Jana',23,'05-FEB-2023','25-NOV-2023','kolkata',180,85,50000);
+insert into Gym_members(id, name, age,joining_date,Expiration_date,city,height,weight,cost) values(Gym_seq.nextval,'Gulshan Kumar',26,'05-Mar-2023','05-JUN-2023','Mumbaie',172,70,15000);
+insert into Gym_members(id, name, age,joining_date,Expiration_date,city,height,weight,cost) values(Gym_seq.nextval,'Tanmay Gajpaye',28,'25-JAN-2023','21-AUG-2023','Pune',155,60,32000);
+insert into Gym_members(id, name, age,joining_date,Expiration_date,city,height,weight,cost) values(Gym_seq.nextval,'Dhritiman Das',24,'12-JAN-2023','20-DEC-2023','Bangalore',190,95,45000);
+insert into Gym_members(id, name, age,joining_date,Expiration_date,city,height,weight,cost) values(Gym_seq.nextval,'Mahesh Addhuri',20,'10-OCT-2023','02-DEC-2023','Mumbai',182,55,60000);
+insert into Gym_members(id, name, age,joining_date,Expiration_date,city,height,weight,cost) values(Gym_seq.nextval,'Khaled Sultan',20,'07-AUG-2023','01-AUG-2024','Pune',168,75,70000);
+ 
+UPDATE Gym_members
+  2  SET city='Mumbai'
+  3  WHERE id = 4;
+
+select * from Gym_members where cost>50000;
+select * from Gym_members where city='pune';
+select * from Gym_members where city='Mumbai' and age>24;
+select * from Gym_members where months_between(expiration_date,joining_date)=3;
+select name, (weight/((height/100)*(height/100))) as bmi from Gym_members;
+select * from Gym_members order by height desc;
+select name, EXTRACT(YEAR FROM sysdate) - age as BIRTH_YEAR from Gym_members 
+		where city = 'mumbai';
